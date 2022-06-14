@@ -1,0 +1,31 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: 'Courier New', sans-serif;
+    font-weight: normal;
+}
+
+body {
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.calculator-grid {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    grid-template-columns: repeat(4, 100px);
+    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+}
+
+.calculator-grid > button {
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.calculator-grid > button:hover {
+    transition-duration: 0.1s;
+    background-color: gray;
+    color: white
+}
