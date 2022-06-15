@@ -14,18 +14,48 @@ body {
     display: grid;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    grid-template-columns: repeat(4, 100px);
-    grid-template-rows: minmax(120px, auto) repeat(5, 100px);
+    grid-template-columns: repeat(4, 70px);
+    grid-template-rows: minmax(100px, auto) repeat(5, 50px);
 }
 
 .calculator-grid > button {
     cursor: pointer;
     font-size: 2rem;
+    margin-left: 3px;
+    border: none;
 }
 
 .calculator-grid > button:hover {
     transition-duration: 0.1s;
     background-color: gray;
     color: white
+}
+
+.span-two {
+    grid-column: span 2;
+    background-color: lightblue;
+    border: none
+}
+
+.output {
+    grid-column: 1 / -1;
+    background-color: rgba(207, 207, 207, 0.75);
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 10px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.output .previous-operand {
+    color: rgb(66, 66, 66);
+    font-size: 1rem;
+}
+
+.output .current-operand {
+    color: rgb(0, 0, 0);
+    font-size: 2.5rem;
+    font-weight: bold;
 }
