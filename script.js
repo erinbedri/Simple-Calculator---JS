@@ -17,6 +17,7 @@ keys.addEventListener('click', (e) => {
             } else {
                 display.textContent = displayedNum + keyContent;
             }
+            calculator.dataset.previousKeyType = 'number';
         }
     
         if (action === 'add' ||
@@ -33,11 +34,14 @@ keys.addEventListener('click', (e) => {
         if (action === 'decimal') {
             if (!displayedNum.includes('.')) {
                 display.textContent = displayedNum + '.';
+            } else if (previousKeyType === 'operator') {
+                display.textContent = '0.';
             }
+            calculator.dataset.previousKeyType = 'decimal';
         }
     
         if (action === 'clear') {
-            console.log('It is delete button');
+            calculator.dataset.previousKeyType = 'clear';
         }
     
         if (action === 'calculate') {
@@ -47,6 +51,8 @@ keys.addEventListener('click', (e) => {
 
             display.textContent = calculate(firstValue, operator, secondValue);
             previousDisplay.textContent = firstValue+ ' ' + getOperator(operator) + ' ' + secondValue;
+
+            calculator.dataset.previousKeyType = 'calculate';
         }
     
         Array.from(key.parentNode.children)
