@@ -10,7 +10,7 @@ keys.addEventListener('click', (e) => {
         const action = key.dataset.action;
         const displayedNum = display.textContent;
         const previousKeyType = calculator.dataset.previousKeyType;
-    
+
         if (!action) {
             if (displayedNum === '0' || previousKeyType === 'operator') {
                 display.textContent = keyContent;
@@ -19,18 +19,25 @@ keys.addEventListener('click', (e) => {
             }
             calculator.dataset.previousKeyType = 'number';
         }
-    
+
         if (action === 'add' ||
             action === 'subtract' ||
             action === 'multiply' ||
             action === 'divide') {
+            const firstValue = calculator.dataset.firstValue
+            const operator = calculator.dataset.operator
+            const secondValue = displayedNum
+
+            if (firstValue && operator && previousKeyType !== 'operator') {
+                display.textContent = calculate(firstValue, operator, secondValue)
+            }
+
             key.classList.add('is-depressed');
             calculator.dataset.previousKeyType = 'operator';
-
             calculator.dataset.firstValue = displayedNum;
             calculator.dataset.operator = action;
         }
-    
+
         if (action === 'decimal') {
             if (!displayedNum.includes('.')) {
                 display.textContent = displayedNum + '.';
@@ -39,22 +46,22 @@ keys.addEventListener('click', (e) => {
             }
             calculator.dataset.previousKeyType = 'decimal';
         }
-    
+
         if (action === 'clear') {
             calculator.dataset.previousKeyType = 'clear';
         }
-    
+
         if (action === 'calculate') {
             const firstValue = calculator.dataset.firstValue;
             const operator = calculator.dataset.operator;
             const secondValue = displayedNum;
 
             display.textContent = calculate(firstValue, operator, secondValue);
-            previousDisplay.textContent = firstValue+ ' ' + getOperator(operator) + ' ' + secondValue;
+            previousDisplay.textContent = firstValue + ' ' + getOperator(operator) + ' ' + secondValue;
 
             calculator.dataset.previousKeyType = 'calculate';
         }
-    
+
         Array.from(key.parentNode.children)
             .forEach(k => { k.classList.remove('is-depressed') });
 
