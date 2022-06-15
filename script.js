@@ -31,7 +31,9 @@ keys.addEventListener('click', (e) => {
         }
     
         if (action === 'decimal') {
-            display.textContent = displayedNum + '.';
+            if (!displayedNum.includes('.')) {
+                display.textContent = displayedNum + '.';
+            }
         }
     
         if (action === 'clear') {
