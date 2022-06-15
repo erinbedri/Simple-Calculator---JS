@@ -1,6 +1,7 @@
 const calculator = document.querySelector('.calculator');
 const keys = calculator.querySelector('.calculator__keys');
 const display = calculator.querySelector('.calculator__display');
+const previousDisplay = calculator.querySelector('.calculator__previousDisplay');
 
 keys.addEventListener('click', (e) => {
     if (e.target.matches('button')) {
@@ -43,6 +44,7 @@ keys.addEventListener('click', (e) => {
             const secondValue = displayedNum;
 
             display.textContent = calculate(firstValue, operator, secondValue);
+            previousDisplay.textContent = firstValue+ ' ' + getOperator(operator) + ' ' + secondValue;
         }
     
         Array.from(key.parentNode.children)
@@ -61,10 +63,25 @@ keys.addEventListener('click', (e) => {
                 result = n1 * n2;
             } else if (operator === 'divide') {
                 if (n2 === 0) {
-                    result = 'You cannot divide by 0';
+                    result = 'Zero Division!';
                 } else {
                     result = n1 / n2;
                 }
+            }
+            return result;
+        }
+
+        function getOperator(operator) {
+            let result = '';
+
+            if (operator === 'add') {
+                result = '+';
+            } else if (operator === 'subtract') {
+                result = '-';
+            } else if (operator === 'multiply') {
+                result = '\u{000D7}';
+            } else if (operator === 'divide') {
+                result = '/'
             }
             return result;
         }
